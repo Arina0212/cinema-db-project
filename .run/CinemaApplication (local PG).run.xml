@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CinemaApplication (local PG)" type="Application" factoryName="Application">
+    <envs>
+      <env name="DB_URL" value="jdbc:postgresql://localhost:5432/cinema" />
+      <env name="DB_USERNAME" value="cinema" />
+      <env name="DB_PASSWORD" value="cinema" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="ru.urfu.cinema.CinemaApplication" />
+    <module name="cinema" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

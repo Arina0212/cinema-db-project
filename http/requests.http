@@ -1,0 +1,92 @@
+### Проверка варианта 3 «Кинотеатр» в IntelliJ HTTP Client.
+### Подставьте нужные id вместо значений из сидов, если данные другие.
+
+@host = http://localhost:8080
+
+### 1. Список фильмов
+GET {{host}}/api/films
+
+### 2. Фильтр по жанру — запрос из имени метода
+GET {{host}}/api/films?genre=фантастика
+
+### 3. JPQL: фильмы по диапазону длительности
+GET {{host}}/api/films/by-duration?minMinutes=100&maxMinutes=170
+
+### 4. Нативный SQL: поиск по названию
+GET {{host}}/api/films/search?title=Дюна
+
+### 5. Новый фильм
+POST {{host}}/api/films
+Content-Type: application/json
+
+{
+  "title": "Гравитация",
+  "genre": "фантастика",
+  "durationMinutes": 91
+}
+
+### 6. Сеансы фильма — запрос из имени метода
+GET {{host}}/api/sessions?filmId=1
+
+### 7. JPQL с join fetch: расписание за период
+GET {{host}}/api/sessions/schedule?from=2026-11-24T00:00:00&to=2026-12-31T23:59:59
+
+### 8. Нативный SQL: сеансы по жанру фильма
+GET {{host}}/api/sessions/by-genre?genre=фантастика
+
+### 9. Criteria API: динамический поиск с необязательными фильтрами
+GET {{host}}/api/sessions/search?hall=Зал 1&maxPrice=430
+
+### 10. Новый сеанс
+POST {{host}}/api/sessions
+Content-Type: application/json
+
+{
+  "filmId": 1,
+  "startsAt": "2026-12-01T19:00:00",
+  "hall": "Зал 4",
+  "price": 410.00
+}
+
+### 11. Покупка билета
+POST {{host}}/api/tickets
+Content-Type: application/json
+
+{
+  "visitorId": 1,
+  "sessionId": 1,
+  "seatNumber": 10
+}
+
+### 12. Билеты посетителя — JPQL с join fetch
+GET {{host}}/api/tickets?visitorId=1
+
+### 13. Продано билетов на сеанс — нативный SQL
+GET {{host}}/api/tickets/sold?sessionId=1
+
+### 14. Регистрация посетителя с бонусной картой
+POST {{host}}/api/visitors
+Content-Type: application/json
+
+{
+  "fullName": "Пётр Сидоров",
+  "email": "petr.sidorov@example.com"
+}
+
+### 15. Посетитель с картой — JPQL с left join fetch
+GET {{host}}/api/visitors/1
+
+### 16. Поиск по email — запрос из имени метода
+GET {{host}}/api/visitors?email=arina.shubina@example.com
+
+### 17. Активные посетители — нативный SQL
+GET {{host}}/api/visitors/active?minTickets=2
+
+### 18. Бонусная карта по номеру — запрос из имени метода
+GET {{host}}/api/bonus-cards/BC-2026-0001
+
+### 19. JPQL: карты с балансом не ниже minPoints
+GET {{host}}/api/bonus-cards?minPoints=100
+
+### 20. Нативный SQL: сумма баллов по всем картам
+GET {{host}}/api/bonus-cards/total-points
